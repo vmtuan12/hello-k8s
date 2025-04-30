@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localjs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: localjs-deployment
+  template:
+    metadata:
+      labels:
+        app: localjs-deployment
+    spec:
+      containers:
+      - name: localjs
+        image: 080196/tuandz:v1
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000

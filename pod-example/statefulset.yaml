@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: localjs-statefulset
+spec:
+  selector:
+    matchLabels:
+      app: localjs-statefulset
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: localjs-statefulset
+    spec:
+      containers:
+      - name: localjs
+        image: 080196/tuandz:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+
