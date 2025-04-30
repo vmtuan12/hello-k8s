@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-from-dir
+data:
+  conf-example-1.conf: |
+    author=tuanvm
+  conf-example-2.conf: |
+    date=30/4/2025
