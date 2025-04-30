@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: localpy
+spec:
+  containers:
+    - name: localpy
+      image: configmap-example:v0.2
+      imagePullPolicy: Never
+      envFrom:
+        - configMapRef:
+            name: example-configmap
+      # config each env variable
+      # env:
+      # - name: AUTHOR
+      #   valueFrom:
+      #     configMapKeyRef:
+      #       name: example-configmap
+      #       key: author
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "1"
+        limits:
+          memory: "512Mi"
+          cpu: "1"
+        
