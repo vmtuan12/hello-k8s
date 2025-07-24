@@ -1,0 +1,43 @@
+# downward api using volume
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    app.kubernetes.io/name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: busybox
+    resources:
+      requests:
+        memory: "1Mi"
+        cpu: "100m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    command: ["sleep", "9999999"]
+    volumeMounts:
+      - mountPath: /etc/downward
+        name: downward
+  volumes:
+    - name: downward
+      downwardAPI:
+        items:
+          - path: POD_NAME
+            fieldRef:
+              fieldPath: metadata.name
+          - path: POD_NAMESPACE
+            fieldRef:
+              fieldPath: metadata.namespace
+          - path: CPU_REQUEST_MILLICORES
+            resourceFieldRef:
+              resource: requests.cpu
+              divisor: 1m
+              containerName: myapp
+          - path: MEM_REQUEST_MB
+            resourceFieldRef:
+              resource: requests.memory
+              divisor: 1Mi
+              containerName: myapp
