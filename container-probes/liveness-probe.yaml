@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-liveness-check
+  labels:
+    app.kubernetes.io/name: pod-liveness-check
+spec:
+  containers:
+  - name: random-generator
+    image: k8spatterns/random-generator:1.0
+    ports:
+      - containerPort: 8080
+    env:
+      - name: DELAY_STARTUP
+        value: "20"
+    livenessProbe:
+      httpGet:
+        path: "/"
+        port: 8080
+      initialDelaySeconds: 30
