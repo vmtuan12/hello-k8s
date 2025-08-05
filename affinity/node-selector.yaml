@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-node-selector
+  labels:
+    app.kubernetes.io/name: pod-node-selector
+spec:
+  nodeSelector:
+    tuan: dz12123
+  containers:
+  - name: myapp
+    image: busybox
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
