@@ -1,0 +1,24 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: websites.extensions.example.com # The full name of your custom object
+spec:
+  scope: Namespaced # You want Website resources to be namespaced.
+  group: extensions.example.com # Define an API group and version of the Website resource.
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                gitRepo:
+                  type: string
+  names: # You need to specify the various forms of the custom object’s name.
+    kind: Website
+    singular: website
+    plural: websites
